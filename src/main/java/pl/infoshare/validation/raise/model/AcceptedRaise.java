@@ -2,6 +2,7 @@ package pl.infoshare.validation.raise.model;
 
 import lombok.Value;
 
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +11,7 @@ public class AcceptedRaise {
     private static final String ID_FORMAT = "%s-%s";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
 
+    @Pattern(regexp = "\\d+\\.\\w+\\.\\d+-\\d+")
     private final String id;
     private final LocalDate date;
     private final BigDecimal acceptedSalary;
@@ -19,7 +21,6 @@ public class AcceptedRaise {
         this.date = date;
         this.acceptedSalary = acceptedSalary;
     }
-
     public static AcceptedRaise forRequest(RaiseRequest raiseRequest) {
         var date = raiseRequest.getProposedRaiseDate();
         var proposedSalary = raiseRequest.getProposedSalary().intValue();

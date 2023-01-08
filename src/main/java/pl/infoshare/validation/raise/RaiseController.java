@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.infoshare.validation.raise.model.AcceptedRaise;
 import pl.infoshare.validation.raise.model.RaiseRequest;
 
+import javax.validation.Valid;
+
 
 @RestController
 public class RaiseController {
@@ -17,7 +19,7 @@ public class RaiseController {
     }
 
     @PostMapping("/api/raises")
-    public AcceptedRaise analyzeRaiseRequest(@RequestBody RaiseRequest raiseRequest) {
+    public AcceptedRaise analyzeRaiseRequest(@RequestBody @Valid RaiseRequest raiseRequest) {
         return raiseService.analyzeRaiseRequest(raiseRequest);
     }
 }
